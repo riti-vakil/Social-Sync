@@ -3,9 +3,12 @@ import { auth } from "@clerk/nextjs";
 import { db } from "@/lib/db";
 
 export const currentProfile = async () => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
-  if (!userId) {
+  const isAuth = !!userId;
+
+  if (!isAuth) {
+    // console.log("null");
     return null;
   }
 
