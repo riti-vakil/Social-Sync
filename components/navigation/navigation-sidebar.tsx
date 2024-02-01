@@ -18,15 +18,25 @@ export const NavigationSideBar = async () => {
     if(!profile){
         return redirect("/");
     } 
-    const servers=await db.server.findMany({
-        where:{
-            members:{
-                some:{
-                    profileId: profile.id
-                }
-            }
+    const memberServerIds = await db.member.findMany({
+        where: {
+          profileId: profile.id
+        },
+        select: {
+          serverId: true
         }
     });
+      
+    const serverIds = memberServerIds.map(member => member.serverId);
+    
+    const servers = await db.server.findMany({
+    where: {
+        id: {
+        in: serverIds
+        }
+    }
+    });
+
     return(
         <div className="space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] bg-[#E3E5E8] py-3">
 
