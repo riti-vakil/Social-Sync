@@ -25,30 +25,6 @@ export async function DELETE(
     if (!params.channelId) {
       return new NextResponse("Channel ID missing", { status: 400 });
     }
-
-    // const server = await db.server.update({
-    //   where: {
-    //     id: serverId,
-    //     members: {
-    //       some: {
-    //         profileId: profile.id,
-    //         role: {
-    //           in: [MemberRole.ADMIN, MemberRole.MODERATOR],
-    //         }
-    //       }
-    //     }
-    //   },
-    //   data: {
-    //     channels: {
-    //       delete: {
-    //         id: params.channelId,
-    //         name: {
-    //           not: "general",
-    //         }
-    //       }
-    //     }
-    //   }
-    // });
     
     const hasPermission = await db.member.findFirst({
         where: {
@@ -69,8 +45,8 @@ export async function DELETE(
         name: { not: "general" }
         }
     });
-    
-    return NextResponse.json(server);
+    console.log(server);
+    return new NextResponse("Channel deleted successfully", { status: 200 });
     
   } catch (error) {
     console.log("[CHANNEL_ID_DELETE]", error);
@@ -111,23 +87,23 @@ export async function PATCH(
           profileId: profile.id,
           role: { in: [MemberRole.ADMIN, MemberRole.MODERATOR] }
         }
-      });
+    });
       
-      if (!hasPermission) {
-        console.error("User does not have permission to update the server.");
-        return null;
+    if (!hasPermission) {
+      console.error("User does not have permission to update the server.");
+      return null;
+    }
+    
+    const server = await db.channel.update({
+      where: {
+        id: params.channelId,
+        name: { not: "general" }
+      },
+      data: {
+        name,
+        type
       }
-      
-      const server = await db.channel.update({
-        where: {
-          id: params.channelId,
-          name: { not: "general" }
-        },
-        data: {
-          name,
-          type
-        }
-      });
+    });
     return NextResponse.json(server);
   } catch (error) {
     console.log("[CHANNEL_ID_PATCH]", error);
