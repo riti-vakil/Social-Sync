@@ -45,8 +45,8 @@ export async function DELETE(
         name: { not: "general" }
         }
     });
-    console.log(server);
-    return new NextResponse("Channel deleted successfully", { status: 200 });
+    
+    return NextResponse.json(server);
     
   } catch (error) {
     console.log("[CHANNEL_ID_DELETE]", error);
