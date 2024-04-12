@@ -62,7 +62,7 @@ export const ServerSideBar = async ({
           }
         }
       });
-
+      console.log(server+"h12")
     const textChannels = server?.channels.filter((channel) => channel.type=== ChannelType.TEXT)
     const audioChannels = server?.channels.filter((channel) => channel.type=== ChannelType.AUDIO)
     const videoChannels = server?.channels.filter((channel) => channel.type=== ChannelType.VIDEO)
