@@ -104,7 +104,7 @@ export async function PATCH(
         type
       }
     });
-    return Response.json(server);
+    return server;
   } catch (error) {
     console.log("[CHANNEL_ID_PATCH]", error);
     return new NextResponse("Internal Error", { status: 500 });
