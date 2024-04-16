@@ -36,7 +36,7 @@ export async function DELETE(
     
     if (!hasPermission) {
         console.error("User does not have permission to update the server.");
-        return null;
+        return;
     }
     
     const server = await db.channel.deleteMany({
