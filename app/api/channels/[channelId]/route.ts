@@ -64,7 +64,7 @@ export async function PATCH(
     const { searchParams } = new URL(req.url);
 
     const serverId = searchParams.get("serverId");
-
+    const g = Response
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -104,7 +104,7 @@ export async function PATCH(
         type
       }
     });
-    return NextResponse.json(server);
+    return Response.json(server);
   } catch (error) {
     console.log("[CHANNEL_ID_PATCH]", error);
     return new NextResponse("Internal Error", { status: 500 });
