@@ -1,10 +1,10 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
-    req: Request,
+    req: NextRequest,
     { params }: { params: { memberId: string } }
   ) {
     try {
@@ -60,7 +60,7 @@ export async function DELETE(
   }
 
 export async function PATCH(
-    req: Request,
+    req: NextRequest,
     { params }: { params: { memberId: string } }
   ) {
     try {

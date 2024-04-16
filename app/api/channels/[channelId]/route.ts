@@ -55,7 +55,7 @@ export async function DELETE(
 }
 
 export async function PATCH(
-  req: Request,
+  req: NextRequest,
   { params }: { params: { channelId: string } }
 ) {
   try {
