@@ -32,6 +32,7 @@ interface ChatItemProps {
   isUpdated: boolean;
   socketUrl: string;
   socketQuery: Record<string, string>;
+  important: boolean;
 };
 
 const roleIconMap = {
@@ -54,7 +55,8 @@ export const ChatItem = ({
   currentMember,
   isUpdated,
   socketUrl,
-  socketQuery
+  socketQuery,
+  important
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const { onOpen } = useModal();
@@ -121,6 +123,8 @@ export const ChatItem = ({
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
   const isImage = !isPDF && fileUrl;
+  const bgColor = important ? "bg-rose-50 dark:bg-rose-900" : "bg-white dark:bg-zinc-800";
+
 
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
