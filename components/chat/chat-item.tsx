@@ -123,7 +123,7 @@ export const ChatItem = ({
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
   const isImage = !isPDF && fileUrl;
-  const bgColor = important ? "bg-rose-50 dark:bg-rose-900" : "bg-white dark:bg-zinc-800";
+  const bgColor = important ? "bg-rose-50 dark:bg-rose-900" : "";
 
 
   return (
@@ -176,7 +176,7 @@ export const ChatItem = ({
           )}
           {!fileUrl && !isEditing && (
             <p className={cn(
-              "text-sm text-zinc-600 dark:text-zinc-300",
+              "text-sm text-zinc-600 dark:text-zinc-300", bgColor,
               deleted && "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1"
             )}>
               {content}
